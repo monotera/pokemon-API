@@ -1,15 +1,9 @@
-const { Sequelize, DataTypes, Model } = require("sequelize");
-const sequelize = new Sequelize(process.env.DB_URL);
+const { DataTypes, Model } = require("sequelize");
+const sequelize = require("../util/database");
 
-class Pokemon extends Model {
-  declare name: String;
-  declare weight: Number;
-  declare is_male: Boolean;
-}
-
-Pokemon.init(
+const Pokemon = sequelize.define(
+  "pokemon",
   {
-    // Model attributes are defined here
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -24,12 +18,7 @@ Pokemon.init(
       allowNull: false,
     },
   },
-  {
-    // Other model options go here
-    sequelize, // We need to pass the connection instance
-    modelName: "pokemon", // We need to choose the model name
-  }
+  { timestamps: false }
 );
 
-// the defined model is the class itself
-console.log(Pokemon === sequelize.models.Pokemon); // true
+module.exports = Pokemon;
