@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../util/database");
 
-const Pokemon = sequelize.define(
-  "pokemon",
+const Role = sequelize.define(
+  "role",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -14,17 +14,9 @@ const Pokemon = sequelize.define(
       allowNull: false,
       unique: true,
     },
-    weight: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    is_male: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
   },
   { timestamps: false }
 );
 
-module.exports = Pokemon;
+module.exports = Role;
 export {};
