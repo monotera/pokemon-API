@@ -1,8 +1,8 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 const Pokemon = require("../models/pokemon");
+const Type = require("../models/type");
 
-exports.getTest = async (req: Request, res: Response) => {
-  const pokemons = await Pokemon.findAll();
-  console.log(pokemons.every((pokemon: []) => pokemon instanceof Pokemon)); // true
+exports.getPokemons = async (req: Request, res: Response) => {
+  const pokemons = await Pokemon.findAll({ include: Type });
   res.send(pokemons);
 };
