@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../util/database");
 
-const Pokemon = sequelize.define(
-  "pokemon",
+const Type = sequelize.define(
+  "type",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -14,17 +14,17 @@ const Pokemon = sequelize.define(
       allowNull: false,
       unique: true,
     },
-    weight: {
-      type: DataTypes.INTEGER,
+    advantage: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
-    is_male: {
-      type: DataTypes.BOOLEAN,
+    disadvantage: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
   },
   { timestamps: false }
 );
 
-module.exports = Pokemon;
+module.exports = Type;
 export {};

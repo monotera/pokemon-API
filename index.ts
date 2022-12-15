@@ -1,16 +1,33 @@
 import express, { Express, Request, Response } from "express";
+import dotenv from "dotenv";
+
 const path = require("path");
 const { Client } = require("pg");
-import dotenv from "dotenv";
 const sequelize = require("./util/database");
 
+const pokemonRoutes = require("./routes/pokemon");
+const roleRoutes = require("./routes/role");
+const typeRoutes = require("./routes/type");
+const userRoutes = require("./routes/user");
+
+const User = require("./models/user");
+const Role = require("./models/role");
+const Pokemon = require("./models/pokemon");
+const Type = require("./models/type");
+
 dotenv.config();
-//Express server config
 const app: Express = express();
 const port = process.env.PORT;
 
-const homeRoutes = require("./routes/home");
-app.use(homeRoutes);
+app.use("/pokemons", pokemonRoutes);
+app.use("/roles", roleRoutes);
+app.use("/types", typeRoutes);
+app.use("/users", userRoutes);
+
+User.belongsToMany(Role, { through: "user_roles", timestamps: false });
+User.belongsToMany(Pokemon, { through: "user_pokemons", timestamps: false });
+Pokemon.belongsToMany(Type, { through: "pokemon_types", timestamps: false });
+Type.belongsToMany(Pokemon, { through: "pokemon_types", timestamps: false });
 
 sequelize
   .sync()

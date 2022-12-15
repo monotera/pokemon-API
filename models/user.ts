@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../util/database");
 
-const Pokemon = sequelize.define(
-  "pokemon",
+const User = sequelize.define(
+  "user",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -12,19 +12,19 @@ const Pokemon = sequelize.define(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
       unique: true,
     },
-    weight: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    is_male: {
-      type: DataTypes.BOOLEAN,
+    password: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },
   { timestamps: false }
 );
 
-module.exports = Pokemon;
+module.exports = User;
 export {};

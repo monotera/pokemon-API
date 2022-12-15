@@ -1,9 +1,9 @@
 const path = require("path");
 const express = require("express");
 const router = express.Router();
-const pokemonController = require("../controllers/pokemon");
+const roleController = require("../controllers/role");
 
-router.get("", pokemonController.getTest);
+router.get("", roleController.getTest);
 
 module.exports = router;
 export {};
